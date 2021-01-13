@@ -1,0 +1,45 @@
+Внутри ZMSProtoSolution\src:
+dotnet new web -n ZMSProto
+
+Внутри ZMSProtoSolution\test: 
+dotnet new xunit -n ZMSProto.Tests
+
+Внутри ZMSProtoSolution:
+dotnet new sln --name ZMSProtoSolution
+
+Внутри ZMSProtoSolution
+dotnet sln ZMSProtoSolution.sln add src/ZMSProto/ZMSProto.csproj test/ZMSProto.Tests/ZMSProto.Tests.csproj
+
+Внутри ZMSProtoSolution
+dotnet build
+
+Внутри ZMSProtoSolution\src\zmsproto
+dotnet run
+
+проверить:
+http://localhost:5000
+
+В Startup.cs:
+services.AddControllers();
+endpoints.MapControllers();
+
+Создать Controllers/ZMSProtoController:
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ZMSProto.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ZMSProtoController : ControllerBase
+    {
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> GetAction()
+        {
+            return new string[] {"this", "is", "hard", "coded"};
+        }
+    }
+}
+
+проверить:
+http://localhost:5000/api/ZMSProto
